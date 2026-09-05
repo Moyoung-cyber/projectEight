@@ -317,14 +317,29 @@ function productdetail($review_count = null, $average_rating = null)
                 }
             }
 
-            // Build single star and review count HTML
+            // Build 5-star rating HTML based on average rating
             if ($review_count && $average_rating !== null) {
-                $star_html = "<span class='star-filled'>★</span>";
-                $score_html = "($review_count Review" . ($review_count == 1 ? '' : 's') . ")";
+                $full_stars = (int) floor($average_rating);
+                $half_star = (($average_rating - $full_stars) >= 0.5) ? 1 : 0;
+                $empty_stars = 5 - $full_stars - $half_star;
+
+                $star_html = '';
+                for ($s = 0; $s < $full_stars; $s++) {
+                    $star_html .= "<span class='star-filled'>★</span>";
+                }
+                if ($half_star) {
+                    $star_html .= "<span class='star-filled'>★</span>";
+                }
+                for ($s = 0; $s < $empty_stars; $s++) {
+                    $star_html .= "<span class='star-empty'>☆</span>";
+                }
+                $score_html = "<span class='ms-1' style='font-size:0.9rem;color:#666;'>(" . number_format($average_rating, 1) . "/5)</span>";
             } else {
-                $star_html = "<span class='star-empty'>☆</span>";
-                $score_html = "(No reviews yet)";
+                $star_html = "<span class='star-empty'>☆</span><span class='star-empty'>☆</span><span class='star-empty'>☆</span><span class='star-empty'>☆</span><span class='star-empty'>☆</span>";
+                $score_html = "<span class='ms-1' style='font-size:0.9rem;color:#666;'>(No reviews yet)</span>";
             }
+
+            $review_label = ($review_count == 1) ? 'Review' : 'Reviews';
 
             echo "<section class='single-banner bg-light-white margin-top-header'>
                     <div class='container'>
@@ -366,8 +381,9 @@ function productdetail($review_count = null, $average_rating = null)
                                     <div class='content product-box-list'>
                                         <div class='title'>
                                             <h4 class='heading'>{$product_name}</h4>
-                                            <div class='d-flex align-items-center mb-2'>
-                                                $star_html <span class='ms-2'>$score_html</span>
+                                            <div class='d-flex align-items-center mb-2 gap-2'>
+                                                <span class='badge bg-info' style='font-size:0.9rem;'>{$review_count} {$review_label}</span>
+                                                $star_html $score_html
                                             </div>
                                         </div>
                                         <div class='price-tag'>
@@ -1246,9 +1262,7 @@ function displayBestSellingProducts($limit = 8)
                         <div class='sold-count' style='color:#6366f1;font-size:0.85rem;font-weight:600;margin-top:0.3rem;'>
                             <i class='fa fa-fire'></i> $total_sold sold
                         </div>
-                        <div class='cart-btn'>
-                            <a href='cart.php?add=$product_id'><i class='fa fa-shopping-cart'></i></a>
-                        </div>
+
                     </div>
                 </a>
             </div>

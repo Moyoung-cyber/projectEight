@@ -66,16 +66,6 @@ if ($review_count > 0) {
 <?php
 // Display breadcrumb and product details
 ?>
-<div class="container mt-3">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="d-inline-block align-middle mb-0">
-                <?php echo htmlspecialchars($product_name); ?>
-                <span class="badge bg-info align-middle ms-2" style="font-size:1.1rem; vertical-align:middle;"> <?php echo $review_count; ?> Review<?php echo $review_count == 1 ? '' : 's'; ?> </span>
-            </h2>
-        </div>
-    </div>
-</div>
 <?php
 productdetail($review_count, $average_rating);
 ?>
