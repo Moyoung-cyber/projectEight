@@ -1,5 +1,6 @@
 <?php
 include ("./include/connect_database.php");
+include ("../config.php");
 // test_secret_key_e78b6608052b4d388f6455ae0df8d9b7
 // test_public_key_3349c4f953df407591d450fb1a890d90
 // https://admin.khalti.com/
@@ -37,9 +38,9 @@ if (isset($_GET['order_id'])) {
 
 $amount = $product_price * 100; // Amount in paisa
 $uniqueProductId = $product_id;
-$uniqueUrl = "http://localhost/projectSixth/user_area/product/$product_id";
+$uniqueUrl = BASE_URL . "user_area/product/$product_id";
 $uniqueProductName = $product_name;
-$successRedirect = "http://localhost/projectSixth/user_area/profile.php?user_order";
+$successRedirect = BASE_URL . "user_area/profile.php?user_order";
 
 function checkValid($data)
 {

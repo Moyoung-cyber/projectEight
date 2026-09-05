@@ -2,6 +2,7 @@
 @session_start();
 include ('include/connect_database.php');
 include("function/commonfunction.php");
+include("config.php");
 
 $user_search_data_value = "";
 if (isset($_GET['search_keyword'])) {
@@ -33,14 +34,14 @@ if (isset($_SESSION["username"])) {
         }
         ?>
     </title>
-    <link rel="stylesheet" type="text/css" href="http://localhost/projectSixth/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/projectSixth/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/projectSixth/css/jquery.fancybox.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/projectSixth/css/all.css">
-    <link rel="stylesheet" href="http://localhost/projectSixth/css/splide.min.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/projectSixth/styles.css">
-    <link rel="icon" href="http://localhost/projectSixth/image/fav.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="http://localhost/projectSixth/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>css/animate.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>css/jquery.fancybox.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>css/all.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/splide.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>styles.css">
+    <link rel="icon" href="<?php echo BASE_URL; ?>image/fav.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>css/responsive.css">
 </head>
 
 <body>
@@ -48,15 +49,15 @@ if (isset($_SESSION["username"])) {
         <div class="container">
             <div class="d-flex justify-content-between align-items-center nav-bar position-relative">
                 <div class="main-logo">
-                    <a href="http://localhost/projectSixth/index.php"><img src="http://localhost/projectSixth/image/newlogo.png" alt=""></a>
+                    <a href="<?php echo BASE_URL; ?>index.php"><img src="<?php echo BASE_URL; ?>image/newlogo.png" alt=""></a>
                 </div>
                 <nav>
                     <ul class="primary-menu">
                         <li>
-                            <a href="http://localhost/projectSixth/">home</a>
+                            <a href="<?php echo BASE_URL; ?>">home</a>
                         </li>
                         <li>
-                            <a href="http://localhost/projectSixth/display_all.php">shop</a>
+                            <a href="<?php echo BASE_URL; ?>display_all.php">shop</a>
                         </li>
                         <li>
                             <a href="#">Tag</a>
@@ -73,7 +74,7 @@ if (isset($_SESSION["username"])) {
                                         $tag_id = $row_tag['id']; 
                                         ?>
                                         <li>
-                                            <a href="http://localhost/projectSixth/tag.php?tag_id=<?php echo $tag_id; ?>"><span><?php echo $tag_name; ?></span></a>
+                                            <a href="<?php echo BASE_URL; ?>tag.php?tag_id=<?php echo $tag_id; ?>"><span><?php echo $tag_name; ?></span></a>
                                         </li>
                                         <?php
                                     }
@@ -97,7 +98,7 @@ if (isset($_SESSION["username"])) {
                                         $category_id = $row_category['id']; 
                                         ?>
                                         <li>
-                                            <a href="http://localhost/projectSixth/category.php?cat_id=<?php echo $category_id; ?>"><span><?php echo $category_name; ?></span></a>
+                                            <a href="<?php echo BASE_URL; ?>category.php?cat_id=<?php echo $category_id; ?>"><span><?php echo $category_name; ?></span></a>
                                         </li>
                                         <?php
                                     }
@@ -107,15 +108,15 @@ if (isset($_SESSION["username"])) {
                             ?>
                         </li>
                         <li>
-                            <a href="http://localhost/projectSixth/contact-two.php">contact</a>
+                            <a href="<?php echo BASE_URL; ?>contact-two.php">contact</a>
                         </li>
 
                         <?php if (!isset($_SESSION["username"])): ?>
                             <li class="right">
                                 <a href="#">Login</a>
                                 <ul class="sub-menu">
-                                    <li><a href="http://localhost/projectSixth/user_area/login-user.php"><span>Login</span></a></li>
-                                    <li><a href="http://localhost/projectSixth/user_area/user_registration.php"><span>Register</span></a></li>
+                                    <li><a href="<?php echo BASE_URL; ?>user_area/login-user.php"><span>Login</span></a></li>
+                                    <li><a href="<?php echo BASE_URL; ?>user_area/user_registration.php"><span>Register</span></a></li>
                                 </ul>
                             </li>
                         <?php else: ?>
@@ -123,9 +124,9 @@ if (isset($_SESSION["username"])) {
                                 <a href="#">Welcome, <?php echo $_SESSION["username"]; ?></a>
                                 <ul class="sub-menu">
                                     <li><a
-                                            href="http://localhost/projectSixth/user_area/profile.php?user=<?php echo $_SESSION["username"]; ?>"><span>Profile</span></a>
+                                            href="<?php echo BASE_URL; ?>user_area/profile.php?user=<?php echo $_SESSION["username"]; ?>"><span>Profile</span></a>
                                     </li>
-                                    <li><a href="http://localhost/projectSixth/user_area/logout.php"><span>Log Out</span></a></li>
+                                    <li><a href="<?php echo BASE_URL; ?>user_area/logout.php"><span>Log Out</span></a></li>
                                 </ul>
                             </li>
                         <?php endif; ?>

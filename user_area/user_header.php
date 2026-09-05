@@ -2,6 +2,7 @@
 @session_start();
 include ('../include/connect_database.php');
 include ("../function/commonfunction.php");
+include ("../config.php");
 
 $user_search_data_value = "";
 if (isset($_GET['search_keyword'])) {
@@ -40,13 +41,13 @@ if (isset($_GET['search_keyword'])) {
                 <nav>
                     <ul class="primary-menu">
                         <li>
-                            <a href="http://localhost/projectSixth/">home</a>
+                            <a href="<?php echo BASE_URL; ?>">home</a>
                         </li>
                         <li>
-                            <a href="http://localhost/projectSixth/contact-two.php">contact</a>
+                            <a href="<?php echo BASE_URL; ?>contact-two.php">contact</a>
                         </li>
                         <li>
-                            <a href="http://localhost/projectSixth/display_all.php">shop</a>
+                            <a href="<?php echo BASE_URL; ?>display_all.php">shop</a>
                         </li>
                         <?php if (!isset($_SESSION["username"])): ?>
                             <li class="right">

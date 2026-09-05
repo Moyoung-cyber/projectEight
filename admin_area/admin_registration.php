@@ -5,31 +5,10 @@ include ("./include/connect_database.php");
 include ('../function/commonfunction.php');
 // use PHPMailer\PHPMailer\PHPMailer;
 
-// // Include PHPMailer Autoload file
-// require 'C:/xampp/htdocs/shop/PHPMailer-master/src/PHPMailer.php';
-
-// Debugging: Output current working directory
-// echo "Current working directory: " . getcwd() . "<br>";
-
-// Attempt to require PHPMailer using different relative paths
-$relative_paths = [
-    './PHPMailer-master/src/PHPMailer.php',
-    '../../projectSixth/PHPMailer-master/src/PHPMailer.php'
-];
-
-$file_found = false;
-foreach ($relative_paths as $relative_path) {
-    if (file_exists($relative_path)) {
-        $file_found = true;
-        require $relative_path;
-        break;
-    }
-}
-
-// If file not found using any relative paths, display an error message
-if (!$file_found) {
-    echo "Error: PHPMailer library not found.<br>";
-}
+// Include PHPMailer classes
+require '../PHPMailer-master/src/Exception.php';
+require '../PHPMailer-master/src/PHPMailer.php';
+require '../PHPMailer-master/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 

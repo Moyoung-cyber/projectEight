@@ -1,6 +1,7 @@
 <?php
 @session_start();
 include ('../include/connect_database.php');
+include ('../config.php');
 
 $user_search_data_value = "";
 if (isset($_GET['search_keyword'])) {
@@ -36,7 +37,7 @@ if (isset($_GET['search_keyword'])) {
             <div class="menu-items">
                 <ul class="primary-menu">
                     <li>
-                        <a href="http://localhost/projectSixth">
+                        <a href="<?php echo BASE_URL; ?>">
                             <i class="fa-solid fa-house-chimney"></i>
                             <span class="text">View site</span>
                         </a>

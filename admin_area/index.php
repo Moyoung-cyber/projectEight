@@ -3,6 +3,7 @@
 
 include ("./include/connect_database.php");
 include ("../function/commonfunction.php");
+include ("../config.php");
 session_start();
 
 // Check if the user is logged in
@@ -42,7 +43,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
             <div class="menu-items">
                 <ul class="primary-menu">
                     <li>
-                        <a href="http://localhost/projectSixth">
+                        <a href="<?php echo BASE_URL; ?>">
                             <i class="fa-solid fa-house-chimney"></i>
                             <span class="text">View site</span>
                         </a>

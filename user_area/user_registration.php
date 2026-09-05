@@ -8,9 +8,9 @@ include("./include/connect_database.php");
 
 // Include PHPMailer Autoload file
 // Include PHPMailer classes
-require 'C:/xampp/htdocs/projectSixth/PHPMailer-master/src/Exception.php';
-require 'C:/xampp/htdocs/projectSixth/PHPMailer-master/src/PHPMailer.php';
-require 'C:/xampp/htdocs/projectSixth/PHPMailer-master/src/SMTP.php';
+require '../PHPMailer-master/src/Exception.php';
+require '../PHPMailer-master/src/PHPMailer.php';
+require '../PHPMailer-master/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -76,7 +76,7 @@ if (isset($_POST['user_register'])) {
             $mail->addAddress($user_email, $user_name);
             $mail->Subject = 'Verify your email address for registration';
             $mail->isHTML(true);
-            $mail->Body = "Please use the following verification code to verify your email address: <strong>$verification_code</strong><br>Enter the code on the following page: <a href='http://localhost/projectSixth/user_area/verify_email_click.php?code=$verification_code'>Verify Email</a>";
+            $mail->Body = "Please use the following verification code to verify your email address: <strong>$verification_code</strong><br>Enter the code on the following page: <a href='" . BASE_URL . "user_area/verify_email_click.php?code=$verification_code'>Verify Email</a>";
 
             if (!$mail->send()) {
                 // Display error message if email sending fails

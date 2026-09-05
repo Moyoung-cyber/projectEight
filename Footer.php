@@ -1,9 +1,10 @@
 <?php
+include("config.php");
 
 // include("function/commonfunction.php");
 
 $isLoggedIn = isset($_SESSION["username"]);
-$cartUrl = $isLoggedIn ? 'http://localhost/projectSixth/cart.php' : 'http://localhost/projectSixth/user_area/login-user.php';
+$cartUrl = $isLoggedIn ? BASE_URL . 'cart.php' : BASE_URL . 'user_area/login-user.php';
 ?>
 <footer>
     <section class="fixed-icon">
@@ -62,7 +63,7 @@ $cartUrl = $isLoggedIn ? 'http://localhost/projectSixth/cart.php' : 'http://loca
                         <div class="icon"><i class="fa-solid fa-xmark"></i></div>
                     </div>
                     <div class="body-section">
-                        <form class="searchForm" action="http://localhost/projectSixth/search.php" method="get">
+                        <form class="searchForm" action="<?php echo BASE_URL; ?>search.php" method="get">
                             <div class="position-relative">
                                 <input class="form_input searchInput" name="search_keyword" type="search" placeholder="Search...">
                                 <label class="form_label" for="searchInput">Search</label>
@@ -86,7 +87,7 @@ $cartUrl = $isLoggedIn ? 'http://localhost/projectSixth/cart.php' : 'http://loca
                             <p>If you are already registered, please log in.</p>
                         </div>
                         <div class="body-section">
-                            <form action="http://localhost/projectSixth/user_area/login.php" method="post">
+                            <form action="<?php echo BASE_URL; ?>user_area/login.php" method="post">
                                 <div class="position-relative form-group">
                                     <label for="username">Username or email <span class="required">*</span></label>
                                     <input type="text/email" name="user_name" class="form-input" required>
@@ -110,7 +111,7 @@ $cartUrl = $isLoggedIn ? 'http://localhost/projectSixth/cart.php' : 'http://loca
                             <div class="create-ac">
                                 <p>Don't have an account? Create and enjoy a new shopping experience.</p>
                                 <div class="item-btn">
-                                    <a href="http://localhost/projectSixth/user_area/user_registration.php" class="speical-btn">
+                                    <a href="<?php echo BASE_URL; ?>user_area/user_registration.php" class="speical-btn">
                                         <span class="text">create a new account</span>
                                     </a>
                                 </div>
@@ -124,9 +125,9 @@ $cartUrl = $isLoggedIn ? 'http://localhost/projectSixth/cart.php' : 'http://loca
                         </a>
                         <ul class="">
                             <li><a
-                                    href="http://localhost/projectSixth/user_area/profile.php?user=<?php echo $_SESSION["username"]; ?>"><span>Profile</span></a>
+                                    href="<?php echo BASE_URL; ?>user_area/profile.php?user=<?php echo $_SESSION["username"]; ?>"><span>Profile</span></a>
                             </li>
-                            <li><a href="http://localhost/projectSixth/user_area/logout.php"><span>Log Out</span></a></li>
+                            <li><a href="<?php echo BASE_URL; ?>user_area/logout.php"><span>Log Out</span></a></li>
                         </ul>
                     </div>
                 <?php endif; ?>
@@ -190,14 +191,14 @@ $cartUrl = $isLoggedIn ? 'http://localhost/projectSixth/cart.php' : 'http://loca
 
 
 
-<script src="http://localhost/projectSixth/js/jquery.min.js"></script>
+<script src="<?php echo BASE_URL; ?>js/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
-<script src="http://localhost/projectSixth/js/wow.min.js"></script>
-<script src="http://localhost/projectSixth/js/bootstrap.js"></script>
-<script src="http://localhost/projectSixth/js/splide.min.js"></script>
-<script src="http://localhost/projectSixth/js/jquery.fancybox.js"></script>
-<script src="http://localhost/projectSixth/js/script.js"></script>
+<script src="<?php echo BASE_URL; ?>js/wow.min.js"></script>
+<script src="<?php echo BASE_URL; ?>js/bootstrap.js"></script>
+<script src="<?php echo BASE_URL; ?>js/splide.min.js"></script>
+<script src="<?php echo BASE_URL; ?>js/jquery.fancybox.js"></script>
+<script src="<?php echo BASE_URL; ?>js/script.js"></script>
 
 </body>
 

@@ -5,8 +5,8 @@ include ("header.php"); ?>
 <?php
 
 // Include the PHPMailer Autoload file
-require 'C:/xampp/htdocs/shop/PHPMailer-master/src/PHPMailer.php';
-require 'C:/xampp/htdocs/shop/PHPMailer-master/src/SMTP.php'; // Include the SMTP class
+require './PHPMailer-master/src/PHPMailer.php';
+require './PHPMailer-master/src/SMTP.php'; // Include the SMTP class
 
 // Check if form is submitted and 'name', 'email', and 'message' fields are set
 if (isset($_POST['name'], $_POST['email'], $_POST['message'])) {

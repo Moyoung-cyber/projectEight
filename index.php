@@ -19,7 +19,7 @@ cart();
             <ul class="splide__list">
                 <li class="splide__slide">
                     <div class="banner"
-                        style="background-image: url('image/hero.png'); background-position: bottom center; background-size: contain;">
+                        style="background-image: url('image/hero.png'); background-position: bottom center; background-size: cover;">
                         <div class="container">
                             <div class="content d-flex align-items-center justify-content-start h-100">
                                 <div class="col-xl-6">
@@ -57,7 +57,7 @@ cart();
                                     <h3 class="title"><small>Crazy Deals</small><br>
                                         <p style = "color: red;">Buy 3 get 1 free</p>
                                         <small>The best Games are on sale at GameBox</small></h3>
-                                    <a href="http://localhost/projectSixth/tag.php?tag_id=2"
+                                    <a href="<?php echo BASE_URL; ?>tag.php?tag_id=2"
                                         class="btn read-more mt-1">Shop Now</a>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@ cart();
                                 <div class="content">
                                     <h3 class="title">NEW GAMES SALE<br>
                                         <small style = "color: red;">Spring / Summer 2023</small></h3>
-                                    <a href="http://localhost/projectSixth/tag.php?tag_id=3"
+                                    <a href="<?php echo BASE_URL; ?>tag.php?tag_id=3"
                                         class="btn read-more mt-1">Shop Now</a>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@ cart();
                             <h3 class="title">Spring/Summer
                                         <p style = "color: red;">Upcoming Games</p><br>
                                         The best Games are on sale at GameBox</h3>
-                            <a href="http://localhost/projectSixth/tag.php?tag_id=2" class="btn read-more mt-1">Shop
+                            <a href="<?php echo BASE_URL; ?>tag.php?tag_id=2" class="btn read-more mt-1">Shop
                                 Now</a>
                         </div>
                     </div>
