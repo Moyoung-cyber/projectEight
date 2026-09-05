@@ -1018,4 +1018,242 @@ function displayTopRatedProducts($limit)
     }
 }
 
+/*
+|--------------------------------------------------------------------------
+| Best Selling Algorithm - Pure PHP Step-by-Step Implementation
+|--------------------------------------------------------------------------
+| All algorithmic logic (filtering, grouping, sorting, selecting) is done
+| in PHP. SQL is ONLY used to fetch raw data. No SQL aggregation, no
+| SQL sorting, no SQL GROUP BY for the algorithm itself.
+|--------------------------------------------------------------------------
+*/
+function displayBestSellingProducts($limit = 8)
+{
+    global $conn;
+
+    // ================================================================
+    // STEP 1: Fetch ALL raw order records from database
+    // ================================================================
+    // We fetch every row from order_status. No filtering, no grouping,
+    // no sorting in SQL. Just raw data retrieval.
+    $sql = "SELECT order_id, product_id, quantity, order_status FROM order_status";
+    $result = mysqli_query($conn, $sql);
+
+    if (!$result || mysqli_num_rows($result) == 0) {
+        echo "<div class='col-12 text-center'><p>No order records found.</p></div>";
+        return;
+    }
+
+    // Store all raw records in a PHP array
+    $all_orders = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $all_orders[] = [
+            'order_id'    => (int) $row['order_id'],
+            'product_id'  => (int) $row['product_id'],
+            'quantity'    => (int) $row['quantity'],
+            'order_status' => $row['order_status']
+        ];
+    }
+
+    // ================================================================
+    // STEP 2: Filter completed orders in PHP
+    // ================================================================
+    // Loop through all orders and keep only those with status 'complete'.
+    // This is filtering logic done entirely in PHP, not in SQL WHERE.
+    $completed_orders = [];
+    $total_orders = count($all_orders);
+
+    for ($i = 0; $i < $total_orders; $i++) {
+        if ($all_orders[$i]['order_status'] === 'complete') {
+            $completed_orders[] = $all_orders[$i];
+        }
+    }
+
+    if (empty($completed_orders)) {
+        echo "<div class='col-12 text-center'><p>No completed orders yet. Check back later!</p></div>";
+        return;
+    }
+
+    // ================================================================
+    // STEP 3: Group by product_id and calculate total quantity (in PHP)
+    // ================================================================
+    // We manually build a sales map: product_id => total_quantity_sold.
+    // No SQL GROUP BY used. All aggregation is done in PHP.
+    $sales_map = [];  // key = product_id, value = total quantity
+    $total_completed = count($completed_orders);
+
+    for ($i = 0; $i < $total_completed; $i++) {
+        $pid = $completed_orders[$i]['product_id'];
+        $qty = $completed_orders[$i]['quantity'];
+
+        // Check if this product already exists in our map
+        $found = false;
+        foreach ($sales_map as $key => $value) {
+            if ($key === $pid) {
+                $sales_map[$pid] += $qty;
+                $found = true;
+                break;
+            }
+        }
+
+        // If product not seen before, add it to the map
+        if (!$found) {
+            $sales_map[$pid] = $qty;
+        }
+    }
+
+    // ================================================================
+    // STEP 4: Convert sales_map to indexed array for sorting
+    // ================================================================
+    // We create an array of [product_id, total_sold] pairs so we can
+    // apply a sorting algorithm on it.
+    $product_sales = [];
+    foreach ($sales_map as $pid => $total) {
+        $product_sales[] = [
+            'product_id' => $pid,
+            'total_sold' => $total
+        ];
+    }
+
+    // ================================================================
+    // STEP 5: Sort using Bubble Sort Algorithm (descending by total_sold)
+    // ================================================================
+    // Classic Bubble Sort implemented in PHP to sort products by
+    // total quantity sold in descending order. This makes the sorting
+    // logic visible and explicit instead of using built-in functions.
+    $n = count($product_sales);
+
+    for ($i = 0; $i < $n - 1; $i++) {
+        for ($j = 0; $j < $n - $i - 1; $j++) {
+            // Compare adjacent elements
+            if ($product_sales[$j]['total_sold'] < $product_sales[$j + 1]['total_sold']) {
+                // Swap if current is less than next (descending order)
+                $temp = $product_sales[$j];
+                $product_sales[$j] = $product_sales[$j + 1];
+                $product_sales[$j + 1] = $temp;
+            }
+        }
+    }
+
+    // ================================================================
+    // STEP 6: Select top N products from sorted array
+    // ================================================================
+    // We manually pick the first $limit elements from the sorted array.
+    // No array_slice used. Simple loop to select top performers.
+    $top_products = [];
+    $select_count = ($limit > count($product_sales)) ? count($product_sales) : $limit;
+
+    for ($i = 0; $i < $select_count; $i++) {
+        $top_products[] = $product_sales[$i];
+    }
+
+    // ================================================================
+    // STEP 7: Fetch product details for each best selling product
+    // ================================================================
+    // For each product in our top list, fetch full details from products
+    // table, category name from categories table, and compute rating
+    // from reviews table. All done individually per product.
+    for ($i = 0; $i < count($top_products); $i++) {
+        $pid = $top_products[$i]['product_id'];
+        $total_sold = $top_products[$i]['total_sold'];
+
+        // 7a: Fetch product basic info
+        $prod_query = "SELECT * FROM products WHERE id = $pid";
+        $prod_result = mysqli_query($conn, $prod_query);
+
+        if (!$prod_result || mysqli_num_rows($prod_result) == 0) {
+            continue; // Skip if product not found
+        }
+        $product = mysqli_fetch_assoc($prod_result);
+
+        // 7b: Fetch category name
+        $cat_id = $product['category_id'];
+        $cat_query = "SELECT category_name FROM categories WHERE id = $cat_id";
+        $cat_result = mysqli_query($conn, $cat_query);
+        $category_name = "Unknown";
+        if ($cat_result && mysqli_num_rows($cat_result) > 0) {
+            $cat_row = mysqli_fetch_assoc($cat_result);
+            $category_name = $cat_row['category_name'];
+        }
+
+        // 7c: Fetch all reviews for this product
+        $rev_query = "SELECT rating FROM reviews WHERE product_id = $pid";
+        $rev_result = mysqli_query($conn, $rev_query);
+
+        // 7d: Calculate average rating manually in PHP (no SQL AVG)
+        $total_rating = 0;
+        $review_count = 0;
+        if ($rev_result) {
+            while ($rev_row = mysqli_fetch_assoc($rev_result)) {
+                $total_rating += (int) $rev_row['rating'];
+                $review_count++;
+            }
+        }
+        $avg_rating = ($review_count > 0) ? ($total_rating / $review_count) : 0;
+
+        // ================================================================
+        // STEP 8: Build star rating HTML in PHP
+        // ================================================================
+        if ($review_count > 0) {
+            $full_stars = (int) floor($avg_rating);
+            $half_star = (($avg_rating - $full_stars) >= 0.5) ? 1 : 0;
+            $empty_stars = 5 - $full_stars - $half_star;
+
+            $star_html = '';
+            for ($s = 0; $s < $full_stars; $s++) {
+                $star_html .= "<span class='star-filled'>★</span>";
+            }
+            if ($half_star) {
+                $star_html .= "<span class='star-filled'>½</span>";
+            }
+            for ($s = 0; $s < $empty_stars; $s++) {
+                $star_html .= "<span class='star-empty'>☆</span>";
+            }
+            $score_html = " " . number_format($avg_rating, 1) . "/5 ($review_count Review" . ($review_count == 1 ? '' : 's') . ")";
+        } else {
+            $star_html = "<span class='star-empty'>☆</span><span class='star-empty'>☆</span><span class='star-empty'>☆</span><span class='star-empty'>☆</span><span class='star-empty'>☆</span>";
+            $score_html = " (No reviews yet)";
+        }
+
+        // ================================================================
+        // STEP 9: Display the product card
+        // ================================================================
+        $product_id = $product['id'];
+        $product_name = $product['product_name'];
+        $product_price = $product['product_price'];
+        $product_image = $product['product_image_1'];
+        $product_in_store = $product['product_in_store'];
+
+        echo "<div class='col-lg-3 col-sm-6'>
+            <div class='new-arrival-box'>
+                <a href='shop-single.php?id=$product_id'>
+                <div class='image'>
+                    <img src='./admin_area/product_images/$product_image' alt='$product_name'>";
+        if ($product_in_store <= 0 || $product_in_store == 1) {
+            echo "<div class='sale-btn'>
+                            <span class='btn read-more'>out of stock</span>
+                        </div>";
+        }
+        echo "
+                </div>
+                <div class='content'>
+                        <div class='category'>" . htmlspecialchars($category_name) . "</div>
+                        <h4 class='heading'>" . htmlspecialchars($product_name) . "</h4>
+                        <div class='rating'>$star_html$score_html</div>
+                        <div class='price-tag'>
+                            Rs. " . number_format($product_price, 2) . "
+                        </div>
+                        <div class='sold-count' style='color:#6366f1;font-size:0.85rem;font-weight:600;margin-top:0.3rem;'>
+                            <i class='fa fa-fire'></i> $total_sold sold
+                        </div>
+                        <div class='cart-btn'>
+                            <a href='cart.php?add=$product_id'><i class='fa fa-shopping-cart'></i></a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>";
+    }
+}
+
 ?>

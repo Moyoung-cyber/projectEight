@@ -126,6 +126,23 @@ cart();
         </div>
     </div>
 </section>
+
+<section class="shop-collection section-gap wow animate__animated animate__backInUp">
+    <div class="container">
+        <div class="content text-center">
+            <div class="title kaushan">
+                <h5 class="heading">Customer Favorites</h5>
+            </div>
+            <h3 class="heading underline">Best Selling Products</h3>
+            <p>Discover what other gamers are loving! Our best sellers are ranked by actual sales data from completed orders.</p>
+        </div>
+
+        <div class="row g-3">
+            <?php displayBestSellingProducts(8); ?>
+        </div>
+    </div>
+</section>
+
 <section class="section-gap main-shop">
     <div class="container">
         <div class="row">
