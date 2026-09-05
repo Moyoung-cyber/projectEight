@@ -1,5 +1,5 @@
 <?php
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 
 if (isset($_GET['order_id']) && isset($_GET['invoice_number']) && isset($_GET['amount']) && isset($_GET['payment_mode'])) {
     $order_id = $_GET['order_id'];

@@ -1,5 +1,5 @@
 <?php
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 
 function getOrderHistory($conn, $days)
 {

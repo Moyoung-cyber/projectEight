@@ -1,4 +1,5 @@
 <?php
+include '../include/connect_database.php';
 
 $sql_sales = "SELECT SUM(amount_due) AS total_sales FROM user_order WHERE order_status = 'complete'";
 $result_sales = mysqli_query($conn, $sql_sales);

@@ -1,4 +1,6 @@
 <?php
+include '../include/connect_database.php';
+
 if (isset($_GET['edit_product'])) {
     $edit_id = $_GET['edit_product'];
 

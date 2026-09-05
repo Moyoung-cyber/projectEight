@@ -759,6 +759,9 @@ textarea {
     flex-direction: column;
     align-items: center;
 }
+.new-arrival-box > a{
+    width: 100%;
+}
 .new-arrival-box:hover {
     box-shadow: 0 8px 32px 0 rgba(60,72,100,0.16);
 }
@@ -1185,7 +1188,7 @@ footer a:hover {
 }
 
 .padding-top-section {
-    padding-top: 100px;
+    margin: 100px 0;
 }
 
 .contact-banner .title .heading,
@@ -2562,3 +2565,7 @@ strong .product-amount {
 .star-empty { color: #ccc !important; }
 
 .new-arrival-box .price-tag { color: #000 !important; }
+
+.animated, .wow, section {
+    overflow: hidden;
+}

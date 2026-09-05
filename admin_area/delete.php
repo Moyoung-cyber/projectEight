@@ -1,4 +1,5 @@
 <?php
+include '../include/connect_database.php';
 
 if (isset($_GET['delete_product'])) {
     $delete_id = $_GET['delete_product'];

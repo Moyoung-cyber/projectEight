@@ -1,5 +1,5 @@
 <?php
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 
 // Retrieve verification code from URL parameters
 $verification_code = $_GET['code'];

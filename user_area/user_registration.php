@@ -1,7 +1,6 @@
 <?php
 @session_start();
 include('../header.php');
-include("./include/connect_database.php");
 // include('../function/commonfunction.php');
 
 // use PHPMailer\PHPMailer\PHPMailer;
@@ -109,73 +108,6 @@ if (isset($_POST['user_register'])) {
 </section>
 
 <section class="login-user padding-top-section">
-    <style>
-    body {
-        min-height: 100vh;
-        background: linear-gradient(120deg, #6366f1 0%, #a5b4fc 100%);
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-    }
-    .register-center-wrapper {
-        min-height: 70vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .register-card {
-        background: #fff;
-        border-radius: 18px;
-        box-shadow: 0 8px 32px rgba(99,102,241,0.12), 0 1.5px 8px rgba(35,39,47,0.08);
-        padding: 2.5rem 2rem;
-        max-width: 500px;
-        width: 100%;
-        margin: 0 auto;
-    }
-    .register-card .form-input, .register-card .form-control {
-        border-radius: 8px;
-        border: 1px solid #d1d5db;
-        padding: 0.75rem 1rem;
-        margin-bottom: 1.2rem;
-        font-size: 1rem;
-        background: #f9fafb;
-        transition: border 0.2s;
-    }
-    .register-card .form-input:focus, .register-card .form-control:focus {
-        border-color: #6366f1;
-        outline: none;
-        background: #fff;
-    }
-    .register-card .btn.read-more {
-        background: linear-gradient(90deg, #6366f1 60%, #a5b4fc 100%);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 0.7rem 1.5rem;
-        font-weight: 600;
-        transition: background 0.2s;
-    }
-    .register-card .btn.read-more:hover {
-        background: linear-gradient(90deg, #4f46e5 60%, #818cf8 100%);
-        color: #fff;
-    }
-    .register-card label {
-        font-weight: 500;
-        color: #23272f;
-    }
-    .register-card .required {
-        color: #e11d48;
-    }
-    .register-card .optional {
-        color: #6366f1;
-        font-size: 0.9em;
-    }
-    .register-card .error {
-        color: #e11d48;
-        font-size: 0.95em;
-        margin-bottom: 0.5rem;
-        display: block;
-    }
-    </style>
     <div class="container register-center-wrapper">
         <form id="registrationForm" class="register-card" action="" method="post" enctype="multipart/form-data">
             <h4 class="heading text-center mb-4">New Registration Form</h4>
@@ -334,9 +266,18 @@ if (isset($_POST['user_register'])) {
     document.getElementById("user_contact").addEventListener("input", validateContact);
 
     // Add event listener for form submission
+   // Add event listener for form submission
     document.getElementById("registrationForm").addEventListener("submit", function (event) {
+        // Run ALL validations first (don't short-circuit) so every error shows at once
+        var isUsernameValid = validateUsername();
+        var isEmailValid = validateEmail();
+        var isPasswordValid = validatePassword();
+        var isConfirmPasswordValid = validateConfirmPassword();
+        var isAddressValid = validateAddress();
+        var isContactValid = validateContact();
+
         // Prevent form submission if any of the validations fail
-        if (!validateUsername() || !validateEmail() || !validatePassword() || !validateConfirmPassword() || !validateAddress() || !validateContact()) {
+        if (!isUsernameValid || !isEmailValid || !isPasswordValid || !isConfirmPasswordValid || !isAddressValid || !isContactValid) {
             event.preventDefault();
         }
     });

@@ -1,7 +1,7 @@
 <?php
 
 
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 include ("../function/commonfunction.php");
 include ("../config.php");
 session_start();

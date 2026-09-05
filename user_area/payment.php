@@ -1,6 +1,6 @@
 <?php
 include ('../header.php');
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 // include("../function/commonfunction.php");
 
 

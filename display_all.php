@@ -37,10 +37,8 @@ $start = ($page - 1) * $limit;
 <section class="pb-5 padding-top-section">
     <div class="container">
         <h3 class="heading underline center text-center">Display all product</h3>
-        <div class="row g-xl-5 g-4 ">
+        <div class="row g-3 ">
             <?php
-            // Open a row
-            echo '<div class="row">';
             $product_count = 0;
             ob_start();
             allproduct($start, $limit);
@@ -48,13 +46,9 @@ $start = ($page - 1) * $limit;
             $products = explode('<div class=\'col-lg-3 col-sm-6\'>', $products_html);
             foreach ($products as $product_html) {
                 if (trim($product_html) === '') continue;
-                if ($product_count > 0 && $product_count % 3 == 0) {
-                    echo '</div><div class="row">';
-                }
                 echo '<div class="col-4">' . $product_html;
                 $product_count++;
             }
-            echo '</div>';
             ?>
         </div>
         
@@ -80,53 +74,3 @@ $start = ($page - 1) * $limit;
 </section>
 
 <?php include ("footer.php"); ?>
-
-<style>
-.shop-title-modern {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #23272f;
-  display: inline-block;
-  position: relative;
-  margin-bottom: 0;
-  margin-top: 0;
-  text-align: center;
-}
-.shop-title-modern::after {
-  content: '';
-  display: block;
-  width: 70px;
-  height: 5px;
-  background: linear-gradient(90deg, #6366f1 60%, #a5b4fc 100%);
-  border-radius: 2px;
-  margin: 0 auto 0 auto;
-}
-.breadcrumb.m-0 {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-</style>
-<style>
-.product-price {
-  display: inline-flex;
-  align-items: center;
-  background: #f3f4fa;
-  border-radius: 999px;
-  padding: 0.15em 0.9em;
-  font-size: 0.95em;
-  box-shadow: 0 2px 8px rgba(99,102,241,0.07);
-  margin-top: 0.5em;
-}
-.product-price .currency {
-  color: #000;
-  font-weight: 700;
-  margin-right: 0.3em;
-  font-size: 0.95em;
-}
-.product-price .amount {
-  color: #000;
-  font-weight: 700;
-  font-size: 1em;
-  letter-spacing: 0.5px;
-}
-</style>

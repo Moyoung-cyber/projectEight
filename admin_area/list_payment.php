@@ -2,6 +2,7 @@
     <div class="container">
 
         <?php
+        include '../include/connect_database.php';
         $get_payment = "SELECT * FROM `user_payments`"; // Corrected 'select' to 'SELECT'
         $result = mysqli_query($conn, $get_payment);
         $row = mysqli_num_rows($result);

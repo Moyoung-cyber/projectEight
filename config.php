@@ -1,3 +1,5 @@
 <?php
-define('BASE_URL', 'http://localhost/projectEight/');
+if (!defined('BASE_URL')) {
+    define('BASE_URL', 'http://localhost/projectEight/');
+}
 ?>

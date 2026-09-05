@@ -1,5 +1,5 @@
 <?php
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['complete_order'])) {

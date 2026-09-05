@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 include ("../function/commonfunction.php");
 $_SESSION['admin_logged_in'] = true;
 

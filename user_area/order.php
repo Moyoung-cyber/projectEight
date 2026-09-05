@@ -1,6 +1,6 @@
 <?php
 include ('../header.php');
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 
 // Check if user_id is set
 $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : null;

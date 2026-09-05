@@ -121,7 +121,7 @@ cart();
             <p>Be the first to grab the latest releases, trending titles, and exclusive GameBox gear. Don’t miss out—our new arrivals are flying off the shelves!</p>
         </div>
 
-        <div class="row g-xl-5 g-4">
+        <div class="row g-3">
             <?php displayProducts(8, false); ?>
         </div>
     </div>
@@ -147,7 +147,7 @@ cart();
         <div class="title">
             <h5 class="heading">Top Rated Products</h5>
         </div>
-        <div class="row g-xl-5 g-4">
+        <div class="row g-3">
             <?php displayTopRatedProducts(4); ?>
         </div>
         <div id="cartBody"></div>

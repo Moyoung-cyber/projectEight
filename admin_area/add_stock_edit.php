@@ -1,4 +1,6 @@
 <?php
+include '../include/connect_database.php';
+
 if (isset($_GET['add_stock_edit'])) {
     $product_id = $_GET['add_stock_edit'];
     $select_query = "SELECT * FROM products WHERE id = '$product_id'";

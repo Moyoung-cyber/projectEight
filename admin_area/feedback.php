@@ -1,4 +1,5 @@
 <?php
+include '../include/connect_database.php';
 
 if (isset($_GET['feedback'])) {
     $select_query = "SELECT * FROM contact_message";

@@ -1,5 +1,5 @@
 <?php
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 include ("../config.php");
 // test_secret_key_e78b6608052b4d388f6455ae0df8d9b7
 // test_public_key_3349c4f953df407591d450fb1a890d90

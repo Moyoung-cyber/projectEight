@@ -1,4 +1,5 @@
 <?php
+include '../include/connect_database.php';
 
 if (isset($_GET['edit_tags'])) {
     $tag_id = $_GET['edit_tags'];

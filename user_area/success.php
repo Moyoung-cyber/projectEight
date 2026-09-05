@@ -1,6 +1,6 @@
 <?php
 include ('../header.php');
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 @session_start();
 
 if (isset($_GET['order_id'])) {

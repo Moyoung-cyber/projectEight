@@ -1,4 +1,5 @@
 <?php
+include '../../include/connect_database.php';
 
 if (isset($_GET['add_stock'])) {
     $select_query = "SELECT * FROM products";

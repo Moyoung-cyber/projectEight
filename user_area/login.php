@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 include ("../function/commonfunction.php");
 
 if (isset($_POST['user_login'])) {

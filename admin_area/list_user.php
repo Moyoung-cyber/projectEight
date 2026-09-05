@@ -2,6 +2,7 @@
     <div class="container">
 
         <?php
+        include '../include/connect_database.php';
         $get_user = "SELECT * FROM `user_table`";
         $result = mysqli_query($conn, $get_user);
         $row = mysqli_num_rows($result);

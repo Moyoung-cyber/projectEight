@@ -1,5 +1,5 @@
 <?php
-
+include '../include/connect_database.php';
 
 // Query to get product list with the number of items sold
 $sql = "SELECT 

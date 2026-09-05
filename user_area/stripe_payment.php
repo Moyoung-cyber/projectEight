@@ -16,7 +16,7 @@ require '../vendor/autoload.php';
 $order_id = $_GET['order_id'];
 
 // Connect to the database and fetch order details
-include ("./include/connect_database.php");
+include ("../include/connect_database.php");
 
 $select_data = "SELECT * FROM `user_order` WHERE order_id = $order_id";
 $query_select = mysqli_query($conn, $select_data);

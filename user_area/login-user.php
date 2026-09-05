@@ -13,67 +13,6 @@
 </section>
 
 <section class="login-user padding-top-section">
-    <style>
-    body {
-        min-height: 100vh;
-        background: linear-gradient(120deg, #6366f1 0%, #a5b4fc 100%);
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-    }
-    .login-center-wrapper {
-        min-height: 70vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .login-card {
-        background: #fff;
-        border-radius: 18px;
-        box-shadow: 0 8px 32px rgba(99,102,241,0.12), 0 1.5px 8px rgba(35,39,47,0.08);
-        padding: 2.5rem 2rem;
-        max-width: 400px;
-        width: 100%;
-        margin: 0 auto;
-    }
-    .login-card .form-input {
-        border-radius: 8px;
-        border: 1px solid #d1d5db;
-        padding: 0.75rem 1rem;
-        margin-bottom: 1.2rem;
-        font-size: 1rem;
-        background: #f9fafb;
-        transition: border 0.2s;
-    }
-    .login-card .form-input:focus {
-        border-color: #6366f1;
-        outline: none;
-        background: #fff;
-    }
-    .login-card .btn.checkout-btn {
-        background: linear-gradient(90deg, #6366f1 60%, #a5b4fc 100%);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 0.7rem 1.5rem;
-        font-weight: 600;
-        transition: background 0.2s;
-    }
-    .login-card .btn.checkout-btn:hover {
-        background: linear-gradient(90deg, #4f46e5 60%, #818cf8 100%);
-    }
-    .login-card .read-more {
-        color: #6366f1;
-        font-weight: 500;
-        text-decoration: underline;
-    }
-    .login-card label {
-        font-weight: 500;
-        color: #23272f;
-    }
-    .login-card .required {
-        color: #e11d48;
-    }
-    </style>
     <div class="container login-center-wrapper">
         <form class="login-card" action="login.php" method="post">
             <h4 class="heading text-center mb-4">Login</h4>
