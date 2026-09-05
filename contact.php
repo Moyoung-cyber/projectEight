@@ -75,13 +75,13 @@ if (isset($_POST['name'], $_POST['email'], $_POST['message'])) {
                         <h4 class="heading underline black">Follow us</h4>
                         <div class="social-icon contact-icon">
                             <div class="icon">
-                                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
                             </div>
                             <div class="icon">
-                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
                             </div>
                             <div class="icon">
-                                <a href="#"><i class="fa-brands fa-google-plus-g"></i></a>
+                                <a href="#" target="_blank"><i class="fa-brands fa-google-plus-g"></i></a>
                             </div>
                         </div>
                     </div>
