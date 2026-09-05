@@ -1,6 +1,10 @@
 jQuery(function ($) {
     $(document).ready(function () {
-        $(".primary-menu li.menu-dropdown > a").append('<span class="dropdown-btn"><i class="fa-solid fa-chevron-down"></i></span>');
+        $(".primary-menu li.menu-dropdown > a").each(function () {
+            if (!$(this).find('.dropdown-btn').length) {
+                $(this).append('<span class="dropdown-btn"><i class="fa-solid fa-chevron-down"></i></span>');
+            }
+        });
 
 
         $('.dropdown-btn').on('click', function (event) {
@@ -14,18 +18,4 @@ jQuery(function ($) {
         });
     });
     $('.primary-menu li').has('ul').addClass('menu-dropdown');
-
-    $(document).ready(function () {
-        var currentPath = window.location.pathname.replace(/\/$/, '');
-
-        $('.primary-menu a').each(function () {
-            var href = $(this).attr('href').replace(/\/$/, '');
-            var lastPartHref = href.substring(href.lastIndexOf('/') + 1);
-            if (currentPath.endsWith(lastPartHref)) {
-                $(this).addClass('active');
-            } else {
-                $(this).removeClass('active');
-            }
-        });
-    });
 });

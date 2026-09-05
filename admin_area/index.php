@@ -6,6 +6,9 @@ include ("../function/commonfunction.php");
 include ("../config.php");
 session_start();
 
+$current_page = basename($_SERVER['PHP_SELF']);
+$q = $_GET;
+
 // Check if the user is logged in
 if (!isset($_SESSION['admin_logged_in'])) {
     // Redirect to the login page

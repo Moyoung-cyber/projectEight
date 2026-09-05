@@ -29,6 +29,16 @@ if (isset($_GET['search_keyword'])) {
 </head>
 
 <body>
+<?php
+// Check if admin is logged in
+$admin_logged_in = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
+
+// Pages that don't need sidebar (login & registration)
+$current_page = basename($_SERVER['PHP_SELF']);
+$is_auth_page = ($current_page === 'admin_login.php' || $current_page === 'admin_registration.php');
+?>
+
+<?php if ($admin_logged_in && !$is_auth_page): ?>
     <header>
         <nav>
             <div class="logo-name">
@@ -110,3 +120,4 @@ if (isset($_GET['search_keyword'])) {
             </div>
         </nav>
     </header>
+<?php endif; ?>

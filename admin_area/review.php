@@ -1,10 +1,4 @@
 <?php
-include ("../include/connect_database.php");
-@ session_start();
-if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: admin_login.php");
-    exit();
-}
 // Handle review deletion BEFORE any output
 if (isset($_GET['delete_review'])) {
     $review_id = intval($_GET['delete_review']);
@@ -12,7 +6,6 @@ if (isset($_GET['delete_review'])) {
     header('Location: index.php?review');
     exit();
 }
-include ("header.php");
 
 // Fetch all reviews with product info and username directly from reviews
 $sql = "SELECT r.id, r.rating, r.comment, r.created_at, p.product_name, r.username
@@ -53,5 +46,3 @@ $result = mysqli_query($conn, $sql);
         </tbody>
     </table>
 </div>
-
-<?php include ("footer.php"); ?> 
