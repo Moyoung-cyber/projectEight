@@ -8,26 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Update admin_status to 'complete'
         $update_order = "UPDATE `user_order` SET `admin_status` = 'complete' WHERE `order_id` = '$order_id'";
         if (mysqli_query($conn, $update_order)) {
-            // Fetch the ordered products and quantities
-            $get_order_details = "SELECT product_id, quantity FROM `order_status` WHERE `order_id` = '$order_id'";
-            $result_order_details = mysqli_query($conn, $get_order_details);
-
-            if ($result_order_details) {
-                $update_order_status = "UPDATE `order_status` SET `order_status` = 'complete' WHERE `order_id` = '$order_id'";
-                $result_order_status = mysqli_query($conn, $update_order_status);
-
-                while ($row_order_details = mysqli_fetch_assoc($result_order_details)) {
-                    $product_id = $row_order_details['product_id'];
-                    $quantity = $row_order_details['quantity'];
-
-                    // Update the product quantity in the products table
-                    $update_product = "UPDATE `products` SET `product_in_store` = `product_in_store` - $quantity WHERE `id` = '$product_id'";
-                    mysqli_query($conn, $update_product);
-                }
-                $message = "Order marked as complete successfully";
-            } else {
-                $message = "Error fetching order details: " . mysqli_error($conn);
-            }
+            // Update order_status table
+            $update_order_status = "UPDATE `order_status` SET `order_status` = 'complete' WHERE `order_id` = '$order_id'";
+            mysqli_query($conn, $update_order_status);
+            $message = "Order marked as complete successfully";
         } else {
             $message = "Error updating order: " . mysqli_error($conn);
         }

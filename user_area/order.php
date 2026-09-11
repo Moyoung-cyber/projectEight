@@ -34,6 +34,8 @@ $insert_orders = "INSERT INTO `user_order` (user_id, product_id, amount_due, inv
                   VALUES ('$user_id', '$product_id', '$total_price', '$invoice_number', '$total_quantity', NOW(), '$status')";
 $result_query = mysqli_query($conn, $insert_orders);
 
+$order_id = mysqli_insert_id($conn);
+
 if ($result_query) {
     echo "<script>alert('Order was submitted successfully');</script>";
     echo "<script>window.open('profile.php', '_self');</script>";
@@ -50,8 +52,8 @@ while ($get_item_quantity = mysqli_fetch_assoc($run_cart)) {
     $product_id = $get_item_quantity['product_id'];
 
     // Insert pending orders
-    $insert_pending_orders = "INSERT INTO `order_status` (user_id, invoice_number, product_id, quantity, order_status) 
-                              VALUES ('$user_id', '$invoice_number', '$product_id', '$quantity', '$status')";
+    $insert_pending_orders = "INSERT INTO `order_status` (order_id, user_id, invoice_number, product_id, quantity, order_status) 
+                              VALUES ('$order_id', '$user_id', '$invoice_number', '$product_id', '$quantity', '$status')";
     if (!mysqli_query($conn, $insert_pending_orders)) {
         echo "Error inserting pending order: " . mysqli_error($conn);
     }

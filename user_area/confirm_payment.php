@@ -33,6 +33,7 @@ if (isset($_POST["conform_payment"])) {
             // Update order status for Cash on Delivery
             $update_order = "UPDATE `user_order` SET order_status = 'complete' WHERE order_id = $order_id";
             $result_order = mysqli_query($conn, $update_order);
+            completeOrderStockUpdate($conn, $order_id);
 
             if ($result_order) {
                 echo "<script>window.location.href='profile.php?user_order';</script>";

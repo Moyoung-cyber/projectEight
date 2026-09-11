@@ -129,6 +129,7 @@ if (isset($_POST["otp"]) && isset($_POST["token"]) && isset($_POST["mpin"])) {
             // Payment is valid
             $update_order = "UPDATE `user_order` SET `order_status` = 'complete' WHERE `order_id` = $order_id";
             if (mysqli_query($conn, $update_order)) {
+                completeOrderStockUpdate($conn, $order_id);
                 $error_message = "<span style='color:green'>Payment success</span> <script> window.location='" . $successRedirect . "'; </script>";
             } else {
                 $error_message = "Error updating order status: " . mysqli_error($conn);

@@ -16,6 +16,8 @@ if (isset($_GET['order_id']) && isset($_GET['invoice_number']) && isset($_GET['a
     $update_order = "UPDATE `user_order` SET order_status = 'complete' WHERE order_id = $order_id";
     $result_order = mysqli_query($conn, $update_order);
 
+    completeOrderStockUpdate($conn, $order_id);
+
     if ($result && $result_order) {
         echo "<script>alert('Payment successful! Your order is complete.')</script>";
         echo "<script>window.open('profile.php?user_order', '_self')</script>";
