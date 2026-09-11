@@ -40,6 +40,9 @@
                   : '<path stroke="#6366f1" stroke-width="2" d="M1.5 12S5.5 5.5 12 5.5 22.5 12 22.5 12 18.5 18.5 12 18.5 1.5 12 1.5 12Z"/><circle cx="12" cy="12" r="3.5" stroke="#6366f1" stroke-width="2"/>';
             });
             </script>
+            <div class="text-center mb-3">
+                <a href="lost-password.php" class="small text-danger">Forgot your password?</a>
+            </div>
             <div class="form-row d-flex gap-2 align-items-center mb-3">
                 <input type="submit" class="btn white-btn checkout-btn" value="login" name="user_login">
                 <a href="verify_email.php" class="btn read-more">Verify Email</a>

@@ -103,7 +103,7 @@ $cartUrl = $isLoggedIn ? BASE_URL . 'cart.php' : BASE_URL . 'user_area/login-use
                                     </button>
                                 </div>
                                 <div class="forget-pw">
-                                    <a href="#" class="line link-style-line">
+                                    <a href="<?php echo BASE_URL; ?>user_area/lost-password.php" class="line link-style-line">
                                         <span class="link-style">Forgot your password</span>
                                     </a>
                                 </div>

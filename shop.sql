@@ -291,7 +291,9 @@ CREATE TABLE `user_table` (
   `user_address` varchar(255) NOT NULL,
   `user_mobile` varchar(20) NOT NULL,
   `verification_code` int(11) NOT NULL,
-  `email_verified` tinyint(1) NOT NULL DEFAULT 0
+  `email_verified` tinyint(1) NOT NULL DEFAULT 0,
+  `reset_token` varchar(64) DEFAULT NULL,
+  `reset_expiry` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
