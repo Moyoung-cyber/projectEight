@@ -31,7 +31,8 @@ if (isset($_POST['reset_password']) && $valid_token) {
     } elseif (strlen($new_password) < 6) {
         $message = '<div class="alert alert-danger">Password must be at least 6 characters long.</div>';
     } else {
-        $escaped_password = mysqli_real_escape_string($conn, $new_password);
+        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+        $escaped_password = mysqli_real_escape_string($conn, $hashed_password);
         $escaped_token = mysqli_real_escape_string($conn, $token);
 
         $update_query = "UPDATE user_table SET user_password = '$escaped_password', reset_token = NULL, reset_expiry = NULL WHERE reset_token = '$escaped_token'";

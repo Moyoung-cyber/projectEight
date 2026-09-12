@@ -15,7 +15,7 @@ if (isset($_POST['admin_login'])) {
     $row_data = mysqli_fetch_array($result);
 
     if ($row > 0) {
-        if ($admin_password === $row_data['admin_password']) { // Compare plain text passwords
+        if (password_verify($admin_password, $row_data['admin_password'])) {
             if ($row_data['email_verified']) { // Check if email is verified
                 $_SESSION["admin_name"] = $admin_name;
                 echo "<script>alert('Login successfully')</script>";

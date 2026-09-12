@@ -65,8 +65,11 @@ if (isset($_POST['user_register'])) {
             $user_image = ""; // Set default value or handle case accordingly
         }
 
+        // Hash the password before storing
+        $hashed_password = password_hash($user_password, PASSWORD_DEFAULT);
+
         // Construct and execute the SQL query
-        $insert_query = "INSERT INTO `user_table`(`user_name`, `user_lname`, `user_email`, `user_password`, `user_image`, `user_address`, `user_mobile`, `verification_code`) VALUES ('$user_name', '$user_lname','$user_email','$user_password','$user_image','$user_address','$user_phone', '$verification_code')";
+        $insert_query = "INSERT INTO `user_table`(`user_name`, `user_lname`, `user_email`, `user_password`, `user_image`, `user_address`, `user_mobile`, `verification_code`) VALUES ('$user_name', '$user_lname','$user_email','$hashed_password','$user_image','$user_address','$user_phone', '$verification_code')";
         $result = mysqli_query($conn, $insert_query);
 
         if ($result) {

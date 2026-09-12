@@ -48,8 +48,11 @@ if (isset($_POST['admin_register'])) {
         // Generate verification code
         $verification_code = generateVerificationCode();
 
+        // Hash the password before storing
+        $hashed_password = password_hash($admin_password, PASSWORD_DEFAULT);
+
         // Construct and execute the SQL query
-        $insert_query = "INSERT INTO `admin_table`(`admin_name`, `admin_email`, `admin_password`, `verification_code`) VALUES ('$admin_name','$admin_email','$admin_password', '$verification_code')";
+        $insert_query = "INSERT INTO `admin_table`(`admin_name`, `admin_email`, `admin_password`, `verification_code`) VALUES ('$admin_name','$admin_email','$hashed_password', '$verification_code')";
         $result = mysqli_query($conn, $insert_query);
 
         if ($result) {

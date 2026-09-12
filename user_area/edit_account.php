@@ -9,7 +9,6 @@ if (isset($_GET['edit_account'])) {
     $user_email = $row_query['user_email'];
     $user_address = $row_query['user_address'];
     $user_mobile = $row_query['user_mobile'];
-    $user_password = $row_query['user_password'];
     $user_image = $row_query['user_image'];
 
     if (isset($_POST['user_update'])) {
@@ -29,11 +28,14 @@ if (isset($_GET['edit_account'])) {
             $user_image = $new_user_image; // Use the new image
         }
 
+        // Hash the password before updating
+        $hashed_password = password_hash($user_password, PASSWORD_DEFAULT);
+
         // Update query
         $update_data = "UPDATE `user_table` SET 
             user_name = '$user_name', 
             user_email = '$user_email', 
-            user_password = '$user_password', 
+            user_password = '$hashed_password', 
             user_address = '$user_address', 
             user_mobile = '$user_mobile', 
             user_image = '$user_image' 
@@ -152,7 +154,7 @@ if (isset($_GET['edit_account'])) {
             </div>
             <div class="form-outline">
                 <label for="user_password">Password</label>
-                <input type="password" class="password form-input" id="user_password" value="<?php echo $user_password; ?>" name="user_password">
+                <input type="password" class="password form-input" id="user_password" value="" name="user_password" placeholder="Enter new password">
                 <input type="checkbox" class="showPassword"> Show Password
                 <span id="passwordError" class="error-message"></span>
             </div>

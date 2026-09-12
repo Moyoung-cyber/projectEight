@@ -15,7 +15,7 @@ if (isset($_POST['user_login'])) {
 
     if ($row > 0) {
         // $_SESSION["username"] = $user_name;
-        if ($user_password === $row_data['user_password']) { // Compare plain text passwords
+        if (password_verify($user_password, $row_data['user_password'])) {
             if ($row_data['email_verified']) { // Check if email is verified
                 $_SESSION["username"] = $row_data['user_name'];
                 $_SESSION["userid"] = $row_data['user_id'];
